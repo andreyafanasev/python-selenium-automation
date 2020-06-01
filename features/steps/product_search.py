@@ -3,15 +3,13 @@ from behave import given, when, then
 from time import sleep
 
 
-SEARCH_INPUT = (By.NAME, 'q')
-SEARCH_SUBMIT = (By.NAME, 'btnK')
-RESULTS_FOUND_MESSAGE = (By.XPATH, "//div[contains(@class,'commercial-unit-desktop-top')]")
-RESULTS = (By.XPATH, "//div[@class='g']")
+SEARCH_INPUT = (By.ID, 'twotabsearchtextbox')
+SEARCH_SUBMIT = (By.XPATH, "//input[@value='Go']")
+RESULTS_INFO_TEXT = (By.XPATH, "//span[@class='a-color-state a-text-bold']")
 
-
-@given('Open Google page')
-def open_google(context):
-    context.driver.get('https://www.google.com/')
+@given('Open Amazon page')
+def open_amazon(context):
+    context.driver.get('https://www.amazon.com/')
 
 
 @when('Input {search_word} into search field')
@@ -30,12 +28,12 @@ def click_search_icon(context):
 
 @then('Product results for {search_word} are shown')
 def verify_found_results_text(context, search_word):
-    results_msg = context.driver.find_element(*RESULTS_FOUND_MESSAGE).text
-    assert search_word in results_msg, "Expected word '{}' in message, but got '{}'".format(search_word, results_msg)
+    search_result_header = context.driver.find_element(*RESULTS_INFO_TEXT).text
+    assert 'Dress' in search_result_header, f'Incorrect header {search_result_header}'
 
 
-@then('First result contains {search_word}')
-def verify_first_result(context, search_word):
-    first_result = context.driver.find_element(*RESULTS).text
-    print('\n{}'.format(first_result))
-    assert search_word in first_result, "Expected word '{}' in message, but got '{}'".format(search_word, first_result)
+# @then('First result contains {search_word}')
+# def verify_first_result(context, search_word):
+#     first_result = context.driver.find_element(*RESULTS).text
+#     print('\n{}'.format(first_result))
+#     assert search_word in first_result, "Expected word '{}' in message, but got '{}'".format(search_word, first_result)
