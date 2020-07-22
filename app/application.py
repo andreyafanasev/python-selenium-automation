@@ -4,6 +4,7 @@ from pages.search_results_page import SearchResults
 from pages.sign_in_page import SignIn
 from pages.empty_cart_page import EmptyCart
 from pages.hamburger_menu_page import HamburgerMenu
+from pages.product_page import Product
 
 
 class Application:
@@ -17,3 +18,4 @@ class Application:
         self.sign_in_page = SignIn(self.driver)
         self.empty_cart_page = EmptyCart(self.driver)
         self.hamburger_menu_page = HamburgerMenu(self.driver)
+        self.product_page = Product(self.driver)
