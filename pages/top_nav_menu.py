@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
+from features.logger import logger
 from pages.base_page import Page
 
 
@@ -18,6 +19,7 @@ class TopNavMenu(Page):
     def select_department(self, alias):
         dep_selection_element = self.find_element(*self.SELECT_DEPARTMENT)
         select = Select(dep_selection_element)
+        logger.info(f'Befor selectin by value: {alias}')
         select.select_by_value(f'search-alias={alias}')
 
     def verify_selected_department(self, selected_dep):
